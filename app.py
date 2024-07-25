@@ -45,10 +45,15 @@ def generate_video(code, language, fps=10, frame_size=(1000, 600), gutter_width=
     lexer = get_lexer_by_name(language, stripall=True)
     style = get_style_by_name("monokai")
     line_pad = 5
+    
+    # Use a default font instead of trying to find one on the system
+    default_font = ImageFont.load_default()
+    
     formatter = ImageFormatter(style=style,
                                line_numbers=False,
                                font_size=font_size,
-                               line_pad=line_pad)
+                               line_pad=line_pad,
+                               font_name="DejaVu Sans Mono")
     
     frames = []
     words = re.findall(r'\S+|\n', code)
